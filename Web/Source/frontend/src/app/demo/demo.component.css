@@ -1,0 +1,47 @@
+.demo-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.top-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.upload{
+    width:100%;margin: 20px;
+}
+.button-click{
+    width: 100%;
+    margin-top: 20px;
+    justify-content: center;
+    display: flex;
+}
+.pdf-text{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+}
+.w25{
+    width:25%;
+}
+.w50{
+    width:50%;
+}
+.w100{
+    width:100%;
+}
+.w30{
+    width:30%;
+}
+.w70{
+    width:70%;
+}
+.flex{
+    display: flex;
+}
+.mr20{
+    margin-right: 20px;
+}

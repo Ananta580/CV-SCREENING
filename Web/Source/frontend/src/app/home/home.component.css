@@ -1,0 +1,36 @@
+.home-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.upload{
+    width:100%;margin: 20px;
+}
+.button-form{
+    justify-content: center;
+    margin-bottom: 60px;
+}
+.bold{
+    font-weight: 700;
+}
+.w25{
+    width:25%;
+}
+.w50{
+    width:50%;
+}
+.w100{
+    width:100%;
+}
+.w30{
+    width:30%;
+}
+.w70{
+    width:70%;
+}
+.flex{
+    display: flex;
+}
+.mr20{
+    margin-right: 20px;
+}

@@ -1,0 +1,19 @@
+<nz-layout>
+  <nz-header>
+    <div><a routerLink="/" class="logo">CV-SCREENING</a></div>
+    <ul nz-menu nzTheme="dark" nzMode="horizontal">
+      <li nz-menu-item nzMatchRouter>
+        <a routerLink="/home"><i nz-icon nzType="home" ></i>HOME</a>
+      </li>
+      <li nz-menu-item nzMatchRouter>
+      <a routerLink="/demo"><i nz-icon nzType="pie-chart" ></i>DEMO</a>
+    </li>
+    </ul>
+  </nz-header>
+  <nz-content>
+    <div class="inner-content">
+      <router-outlet></router-outlet>
+    </div>
+  </nz-content>
+  <nz-footer>CV-Screening ©2021 Implemented By <span class="group-name">A4-2073-BATCH</span></nz-footer>
+</nz-layout>

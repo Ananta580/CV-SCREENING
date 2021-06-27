@@ -1,0 +1,55 @@
+<div class="demo-container">
+
+    <div class="top-container">
+
+        <ng-container *ngIf="button.id==1">
+            <nz-upload class="upload" nzType="drag" [nzMultiple]="false" [nzAction]="imageUrl"
+                (nzChange)="handleChange($event)">
+                <p class="ant-upload-drag-icon">
+                    <i nz-icon nzType="inbox"></i>
+                </p>
+                <p class="ant-upload-text">Click or drag CV to this area to upload</p>
+                <p class="ant-upload-hint">
+                    Support for a single upload only
+                </p>
+            </nz-upload>
+        </ng-container>
+
+        <ng-container *ngIf="button.id==2">
+            <div class="pdf-text">
+            <h3>TEXT RESULT PDF TO TEXT</h3>
+            <textarea rows="22" nz-input [(ngModel)]="textValue"></textarea>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="button.id==3">
+            <div class="pdf-text">
+            <h3>TEXT TO CONCEPT EXTRACTION</h3>
+            <textarea rows="5" nz-input [(ngModel)]="textValue"></textarea>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="button.id==4">
+            <div class="pdf-text">
+            <h3>CONCEPT LINKING FROM CONCEPT EXTRACTION</h3>
+            <textarea rows="22" nz-input [(ngModel)]="textValue"></textarea>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="button.id==5">
+            <div class="pdf-text">
+            <h3 style="text-decoration: underline;">ONTOLOGY GENERATED</h3>
+            <p style="font-size: 30px;">{{textValue}}</p>
+            </div>
+        </ng-container>
+
+    </div>
+
+    <div class="button-click">
+        <button (click)="submitForm()" class="w25 button-click" nzSize="large" nzShape="round" nz-button
+            nzType="primary">
+            <ng-container>
+                {{button.name}}
+            </ng-container>
+        </button>
+    </div>
+</div>

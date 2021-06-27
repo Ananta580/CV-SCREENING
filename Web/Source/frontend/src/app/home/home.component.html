@@ -1,0 +1,139 @@
+<div class="home-container">
+  <form nz-form class="w100" *ngIf="!showResult else resultTemplate">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="email">Job Description Name</nz-form-label>
+      <nz-form-control [nzSpan]="14" class="w100 flex">
+        <nz-select [ngModelOptions]="{standalone: true}" class="w70" nzShowSearch nzAllowClear
+          nzPlaceHolder="Select a job description name" [(ngModel)]="selectedValue">
+          <nz-option *ngFor="let job of descriptionList" [nzLabel]="job.name" [nzValue]="job.id.value">
+          </nz-option>
+        </nz-select>
+        <ng-template #contentTemplate>
+          <div>
+            <p><span class="bold">Name : </span> {{jobView.name}}</p>
+            <p><span class="bold">Degree : </span>{{jobView.degree}}<span class="bold">   Weight : </span>{{jobView.degreeWeight}}</p>
+            <p><span class="bold">Skills : </span>{{jobView.skills}}<span class="bold">   Weight : </span>{{jobView.skillsWeight}}</p>
+            <p><span class="bold">Designation : </span>{{jobView.designation}}<span class="bold">   Weight : </span>{{jobView.designationWeight}}</p>
+            <p><span class="bold">Experience : </span>{{jobView.experienceYear}}<span class="bold">   Weight : </span>{{jobView.experienceYearWeight}}</p>
+          </div>
+        </ng-template>
+        <button nz-popover (click)="seePopUp()" nzPopoverTitle="Job Description" [nzPopoverContent]="contentTemplate" nzPopoverTrigger="click" nzPopoverPlacement="bottom" nz-button nzType="dashed"><i nz-icon nzType="eye"></i></button>
+        <button [disabled]="isSpinning" class="w20" (click)="showAddModal()" nz-button nzType="primary"><i nz-icon nzType="plus"></i>Add
+          New Jobs</button>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item style="justify-content: center;">
+      <nz-upload class="upload" nzType="drag" [nzMultiple]="true" [nzAction]="imageUrl"
+        (nzChange)="handleChange($event)">
+        <p class="ant-upload-drag-icon">
+          <i nz-icon nzType="inbox"></i>
+        </p>
+        <p class="ant-upload-text">Click or drag CV pdf's to this area to upload</p>
+        <p class="ant-upload-hint">
+          Support for a single or bulk upload
+        </p>
+      </nz-upload>
+    </nz-form-item>
+    <nz-form-item class="button-form">
+      <button (click)="submitForm()" [disabled]="isSpinning" class="w25" nzSize="large" nzShape="round" nz-button nzType="primary">
+        <i nz-icon [nzType]="'sync'" [nzSpin]="isSpinning"></i>Proccess CV's</button>
+    </nz-form-item>
+
+  </form>
+  <ng-template #resultTemplate>
+    <nz-card style="width:100%;" nzTitle="TOP CANDIDATES AND THEIR CV'S" [nzExtra]="extraTemplate">
+    <nz-table [nzBordered]="true" #basicTable [nzData]="finalResult" [nzShowPagination]="false">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Candidate Name</th>
+          <th>Match Index</th>
+          <th nzWidth="150px" nzAlign="center">Original CV</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of basicTable.data;let i= index">
+          <td>{{ i+1 }}</td>
+          <td>{{ data.name }}</td>
+          <td>{{ data.weight }}</td>
+          <td nzWidth="150px" nzAlign="center">
+            <button nz-button nzShape="round" nzType="danger" (click)="viewPdf(data.pdfname)"><i nz-icon nzType="eye" ></i>View</button>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </nz-card>
+  <ng-template #extraTemplate>
+    <button  (click)="backToUploadPage()" nz-button nzType="primary"><i nz-icon nzType="backward"></i>Back To Add</button>
+  </ng-template>
+  </ng-template>
+</div>
+
+<nz-modal [(nzVisible)]="isVisible" [nzWidth]="700" nzTitle="JOB DESCRIPTION" nzOkText="Save Job"
+  (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <form nz-form [formGroup]="decriptionForm">
+    <nz-form-item class="w100">
+      <nz-form-label [nzSpan]="6" nzFor="name">Job Name</nz-form-label>
+      <nz-form-control [nzSpan]="17">
+        <input nz-input name="name" type="text" id="name" formControlName="name" placeholder="Enter Some Unique Name">
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="degree">Suited Degree's</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <nz-select nzMode="tags" [ngModelOptions]="{standalone: true}" nzPlaceHolder="Degree , press enter for new"
+          [(ngModel)]="listOfSelectedDegree">
+          <nz-option *ngFor="let option of listOfDegree" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+        </nz-select>
+      </nz-form-control>
+      <nz-form-control [nzSpan]="3">
+        <nz-input-number class="w100" formControlName="degreeWeight" [nzMin]="0" [nzMax]="1" [nzStep]="0.1"
+          nzPlaceHolder="Weight"></nz-input-number>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="designation">Suited Designation's</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <nz-select nzMode="tags" [ngModelOptions]="{standalone: true}" nzPlaceHolder="Designation , press enter for new"
+          [(ngModel)]="listOfSelectedDesignation">
+          <nz-option *ngFor="let option of listOfDesignation" [nzLabel]="option.label" [nzValue]="option.value">
+          </nz-option>
+        </nz-select>
+      </nz-form-control>
+      <nz-form-control [nzSpan]="3">
+        <nz-input-number class="w100" formControlName="designationWeight" [nzMin]="0" [nzMax]="1" [nzStep]="0.1"
+          nzPlaceHolder="Weight"></nz-input-number>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="skills">Suited Skill's</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <nz-select nzMode="tags" [ngModelOptions]="{standalone: true}" nzPlaceHolder="Skill , press enter for new"
+          [(ngModel)]="listOfSelectedSkill">
+          <nz-option *ngFor="let option of listOfSkill" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+        </nz-select>
+      </nz-form-control>
+      <nz-form-control [nzSpan]="3">
+        <nz-input-number class="w100" formControlName="skillsWeight" [nzMin]="0" [nzMax]="1" [nzStep]="0.1"
+          nzPlaceHolder="Weight"></nz-input-number>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="skills">Minimum Experience</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <nz-input-number class="w100" formControlName="experienceYear" [nzMin]="0" [nzMax]="1" [nzStep]="0.1"
+          nzPlaceHolder="Minimum Experience Year"></nz-input-number>
+      </nz-form-control>
+      <nz-form-control [nzSpan]="3">
+        <nz-input-number class="w100" formControlName="experienceYearWeight" [nzMin]="0" [nzMax]="1" [nzStep]="0.1"
+          nzPlaceHolder="Weight"></nz-input-number>
+      </nz-form-control>
+    </nz-form-item>
+
+  </form>
+</nz-modal>
