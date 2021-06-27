@@ -1,0 +1,51 @@
+<html>
+
+<head>
+  <title>Main Page</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+
+<body>
+  <header>
+    <ul class="navBar">
+      <li><a class="active" href="{{ url_for('index') }}">Home</a></li>
+      <li><a href="{{ url_for('demo_page') }}">Demo</a></li>
+    </ul>
+  </header>
+  <main class="container">
+    <button class="ui button primary" id="show-modal">Add Custom Jobs</button>
+    <select id="job-desc" class="ui fluid dropdown" multiple="false">
+      {% for jobs in jobDescriptionList %}
+    <option value="{{ jobs.id }}">{{ jobs.name }}</option>
+      {% endfor %}
+    </select>
+  </main>
+  <div class="ui special modal">
+    <div class="header">
+      JOB DESCRIPTION
+    </div>
+    <div class="content">
+      Profile Picture
+    </div>
+    <div class="actions">
+      <div class="ui red deny button">
+        Cancel
+      </div>
+      <div class="ui positive right labeled icon button">
+        Save Me
+        <i class="checkmark icon"></i>
+      </div>
+    </div>
+  </div>
+  <footer class="footer">
+    <p>&#169; 2021
+    </p>
+  </footer>
+  <script src="{{ url_for('static', filename='jquery-mini.js') }}"></script>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='semantic.min.css') }}">
+  <script src="{{ url_for('static', filename='semantic.min.js') }}"></script>
+
+</body>
+
+</html>

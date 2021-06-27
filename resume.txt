@@ -1,0 +1,47 @@
+
+
+designation:
+Finance Manager
+Tax Assistant
+Deputy Director, Finance
+Accountant
+Trainee
+Associate Director, Finance
+Director, Finance
+
+
+degree:
+CA
+GCE “O’ Level
+Bachelor of Accountancy
+GCE “A” level
+
+
+skill:
+PowerPoint
+Hyperion
+Word
+MS Office
+HFM
+Telmera: Access Database
+Excel
+Accpac
+
+
+experience:
+May 95 – Jul 95
+2007 - 2009
+2012 - 2015
+1997-2000
+Jan 93 – Jun 93
+2000 – 2007
+2015 - Present
+2009 - 2012
+
+
+email:
+ltlee74@gmail.com
+
+
+name:
+Lee Li Ting
